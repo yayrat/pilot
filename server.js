@@ -31,10 +31,16 @@ app.get('/eth/address',
     res.status(200).json('Address: [' + address + "]");
   });
 
-app.get('/eth/UpdateParty/:address,:perm',
+app.get('/eth/AddRights/:address&:perm',
   function(req, res){
-    var UpdateParty = contract.UpdateParty(req.params.address, req.params.perm);
-    res.status(200).json('UpdateParty: [' + UpdateParty + "]");
+    var AddRights = contract.AddRights(req.params.address, req.params.perm);
+    res.status(200).json('AddRights: [' + AddRights + "]");
+  });
+
+app.get('/eth/GiveTokenPerm/:address&:token',
+  function(req, res){
+    var GiveTokenPerm = contract.GiveTokenPerm(req.params.address, req.params.token);
+    res.status(200).json('GiveTokenPerm: [' + GiveTokenPerm + "]");
   });
 
 app.get('/eth/PartiesList/:hash',
@@ -43,9 +49,9 @@ app.get('/eth/PartiesList/:hash',
     res.status(200).json('PartiesList: [' + PartiesList + "]");
   });
 
-app.get('/eth/AddHash/:hash1&:hash2&:hash3&:token',
+app.get('/eth/AddHash/:hash1&:hash2&:hash3&:token1&:profile',
   function(req, res){
-    var AddHash = contract.AddHash(req.params.hash1, req.params.hash2, req.params.hash3, req.params.token);
+    var AddHash = contract.AddHash(req.params.hash1, req.params.hash2, req.params.hash3, req.params.token1, req.params.profile);
     res.status(200).json('AddHash: [' + AddHash + "]");
   });
 
@@ -61,10 +67,10 @@ app.get('/eth/Request/:hash1&:hash2&:hash3&:token',
     res.status(200).json('Request: [' + Request + "]");
   });
 
-app.get('/eth/FullRequest/:hash1&:hash2&:hash3&:token',
+app.get('/eth/RequestPC/:hash1&:hash2&:hash3&:token',
   function(req, res){
-    var FullRequest = contract.FullRequest(req.params.hash1, req.params.hash2, req.params.hash3, req.params.token);
-    res.status(200).json('FullRequest: [' + FullRequest + "]");
+    var RequestPC = contract.RequestPC(req.params.hash1, req.params.hash2, req.params.hash3, req.params.token);
+    res.status(200).json('RequestPC: [' + RequestPC + "]");
   });
 
 app.listen(port);

@@ -21,15 +21,22 @@ if(web3.isConnected()){
     pilot.error = "Error created contract";
 }        
 
-module.exports.
-
 module.exports.address = function(){
     return JSON.stringify(pilot);
 }
 
-module.exports.UpdateParty = function(address, perm){
+module.exports.AddRights = function(address, perm){
+    //console.log(address + ' ' + perm);
     if(!!pilot){
-        var result = pilot.UpdateParty.sendTransaction(address, perm);
+        var result = pilot.AddRights.sendTransaction(address, perm);
+        return result;
+    }
+}
+
+module.exports.GiveTokenPerm = function(address, token){
+    //console.log(address + ' ' + token);
+    if(!!pilot){
+        var result = pilot.GiveTokenPerm.sendTransaction(address, token);
         return result;
     }
 }
@@ -41,9 +48,12 @@ module.exports.PartiesList = function(hash){
     }
 }
 
-module.exports.AddHash = function(hash1, hash2, hash3, token){
+module.exports.AddHash = function(hash1, hash2, hash3, token1, profile){
+    //console.log(hash1 + ' ' + hash2 + ' ' + hash3 + ' ' + token1 + ' ' + profile);
+    //console.log(token);
+    
     if(!!pilot){
-        var result = pilot.AddHash.sendTransaction(hash1, hash2, hash3, token);
+        var result = pilot.AddHash.sendTransaction(hash1, hash2, hash3, token1);
         return result;
     }
 }
@@ -55,16 +65,18 @@ module.exports.RequestC = function(hash1, hash2, hash3, token){
     }
 }
 
-module.exports.Request = function(hash1, hash2, hash3, token){
+module.exports.RequestPC = function(hash1, hash2, hash3, token){
+    //console.log(hash1 + ' ' + hash2 + ' ' + hash3 + ' ' + token);
     if (!!pilot){
-        var result = pilot.RequestC.sendTransaction(hash1, hash2, hash3, token);
+        var result = pilot.RequestPC.call(hash1, hash2, hash3, token);
         return result;
     }
 }
 
-module.exports.FullRequest = function(hash1, hash2, hash3, token){
+module.exports.Request = function(hash1, hash2, hash3, token){
+    //console.log(hash1 + ' ' + hash2 + ' ' + hash3 + ' ' + token);
     if (!!pilot){
-        var result = pilot.FullRequest.Call(hash1, hash2, hash3);
+        var result = pilot.Request.sendTransaction(hash1, hash2, hash3, token);
         return result;
     }
 }

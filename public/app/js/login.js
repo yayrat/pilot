@@ -3,26 +3,35 @@
 
   angular
     .module('App')
-    .directive('login', login);
-
-  function login(){
+    .directive('login', addRights);
+  
+  function addRights(){
     var directive = {
       restrict:'E',
       scope:{
       },
       templateUrl: '/templates/login.html',
-      controller: Login,
+      controller: AddRights,
       bindToController: true
     };
 
     return directive;
   };
-  
-  
-  Login.$inject = ['$scope', 'dataAssistant'];
-
-  function Login($scope, dataAssistant){
     
+  AddRights.$inject = ['$scope', 'dataAssistant'];
+
+  function AddRights($scope, dataAssistant){
+    $scope.AddRights = function(){        
+        var address = $scope.address;
+        var perm = $scope.permission;
+        //var path = '/eth/AddRights/'+address+'&'+perm;
+        var path = `/eth/AddRights/${address}&${perm}`;
+        dataAssistant.get(path).then(function(data){
+            $scope.addRights_result = data;
+        },function(error){
+            $scope.addRights_error = error;
+        });
+    };
   }  
   
 })();	

@@ -23,14 +23,14 @@
 
   function Search($scope, dataAssistant, cryptoUtils){
     
-      $scope.RequestC = function(){
+      $scope.RequestPC = function(){
         var hash1 = $scope.hash1;
         var hash2 = $scope.hash2;
         var hash3 = $scope.hash3;
-        var token = $scope.token;
-        dataAssistant.get('/eth/RequestC/hash1&hash2&hash3&token').then(function(data){            
+        var token = $scope.hash4;
+        var path = `/eth/RequestPC/${hash1}&${hash2}&${hash3}&${token}`;
+        dataAssistant.get(path).then(function(data){            
             $scope.search_result = data;
-            var event = 
         },function(error){
             $scope.search_error = error;
         });
@@ -40,8 +40,9 @@
         var hash1 = $scope.hash1;
         var hash2 = $scope.hash2;
         var hash3 = $scope.hash3;
-        var token = $scope.token;
-        dataAssistant.get('/eth/Request/hash1&hash2&hash3&token').then(function(data){            
+        var token = $scope.hash4;
+        var path = `/eth/Request/${hash1}&${hash2}&${hash3}&${token}`;
+        dataAssistant.get(path).then(function(data){            
             $scope.search_result = data;
         },function(error){
             $scope.search_error = error;
@@ -61,7 +62,7 @@
       }
       
       $scope.calcToken = function(){
-        $scope.token = cryptoUtils.SHA256($scope.token);
+        $scope.hash4 = cryptoUtils.SHA256($scope.token);
       }
     
   }  
